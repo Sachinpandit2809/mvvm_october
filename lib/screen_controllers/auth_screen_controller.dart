@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mvvm_october/model/user_model.dart';
 import 'package:mvvm_october/repository/auth_repository.dart';
+import 'package:mvvm_october/screen_controllers/user_session_controller.dart';
 import 'package:mvvm_october/utils/routes/route_names.dart';
 import 'package:mvvm_october/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 class AuthScreenController with ChangeNotifier {
   final _myRepo = AuthRepository();
@@ -16,6 +19,11 @@ class AuthScreenController with ChangeNotifier {
     setLoginLoading(true);
     _myRepo.login(data).then((onValue) {
       debugPrint(onValue.toString());
+      final userPreference =
+          Provider.of<UserSessionController>(context, listen: false);
+      userPreference.saveUser(UserModel(
+        email: onValue['email'].toString(),
+      ));
       Utils.toastSuccessMessage(onValue['message'].toString());
       Navigator.pushNamed(context, RouteNames.home);
       setLoginLoading(false);

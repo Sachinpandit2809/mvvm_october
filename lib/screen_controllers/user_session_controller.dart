@@ -24,8 +24,8 @@ class UserSessionController with ChangeNotifier {
 
   Future<bool> removeUser() async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
-    // sp.remove("email");
-    // notifyListeners();
-    return sp.clear();
+    sp.remove("email");
+    notifyListeners();
+    return true;
   }
 }
