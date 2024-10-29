@@ -18,7 +18,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => AuthScreenController(),
+        ChangeNotifierProvider(
+          create: (_) => AuthScreenController(),
         ),
         ChangeNotifierProvider(create: (_) => UserSessionController())
       ],
@@ -28,7 +29,7 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        initialRoute: RouteNames.login,
+        initialRoute: RouteNames.splash,
         onGenerateRoute: Routes.generateRoute,
       ),
     );
